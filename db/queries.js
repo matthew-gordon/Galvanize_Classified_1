@@ -22,8 +22,8 @@ function add(classified) {
   return classifieds().insert(classified, 'id');
 }
 
-function update(updates) {
-  return classifieds().update(updates, 'id');
+function update(classifiedID, updates) {
+  return classifieds().where('id', parseInt(classifiedID)).update(updates);
 }
 
 module.exports = {

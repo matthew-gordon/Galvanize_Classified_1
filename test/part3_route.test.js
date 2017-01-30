@@ -10,24 +10,26 @@ const server = require('../server');
 
 suite('Part 3: CRUD routes for classifieds resource should be created.', () => {
 
-  before((done) => {
-  knex.migrate.latest()
+
+
+  beforeEach((done) => {
+    knex.migrate.rollback()
     .then(() => {
-      done();
-    })
-    .catch((err) => {
-      done(err);
+      knex.migrate.latest()
+      .then(() => {
+        return knex.seed.run()
+        .then(() => {
+          done();
+        });
+      });
     });
   });
 
-  beforeEach((done) => {
-    knex.seed.run()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
+  afterEach((done) => {
+    knex.migrate.rollback()
+    .then(() => {
+      done();
+    });
   });
 
   test('GET /classifieds should return the id,title, description, price and item_image of all classifieds.', (done) => {

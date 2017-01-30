@@ -40,9 +40,19 @@ router.post('/', (req, res, next) => {
   });
 });
 
-// *** PUT update single classified by id *** //
-router.put('/:id', (req, res, next) => {
-  res.send(`hello from PUT route`);
+// *** PATCH update single classified by id *** //
+router.patch('/:id', (req, res, next) => {
+  queries.update(req.params.id, req.body)
+  .then(() => {
+    return queries.getSingle(req.params.id);
+  })
+  .then((classified) => {
+    res.status(200).json(classified);
+    console.log(classified);
+  })
+  .catch((error) => {
+    next(error);
+  });
 });
 
 module.exports = router;
