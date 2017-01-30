@@ -16,4 +16,15 @@ router.get('/', (req, res, next) => {
   })
 });
 
+// *** GET all classifieds *** //
+router.get('/:id', (req, res, next) => {
+  queries.getSingle(req.params.id)
+  .then((classified) => {
+    res.status(200).json(classified);
+  })
+  .catch((error) => {
+    next(error);
+  })
+});
+
 module.exports = router;

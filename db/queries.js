@@ -5,15 +5,20 @@ const knex = require('../knex');
 // *** Helper *** //
 
 function classifieds() {
-  return knex('classifieds');
+  return knex('classifieds').select('id', 'title', 'description', 'price', 'item_image');
 }
 
 // *** classifieds queries *** //
 
 function getAll() {
-  return classifieds().select('id', 'title', 'description', 'price', 'item_image');
+  return classifieds();
+}
+
+function getSingle(classifiedID) {
+  return classifieds().where('id', parseInt(classifiedID)).first();
 }
 
 module.exports = {
-  getAll: getAll
+  getAll: getAll,
+  getSingle: getSingle
 }
