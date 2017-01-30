@@ -22,8 +22,13 @@ function add(classified) {
   return classifieds().insert(classified, 'id');
 }
 
+function update(updates) {
+  return classifieds().update(updates, 'id');
+}
+
 module.exports = {
   getAll: getAll,
   getSingle: getSingle,
-  add: add
+  add: add,
+  update: update
 };

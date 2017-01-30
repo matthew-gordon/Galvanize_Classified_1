@@ -1,4 +1,3 @@
-
 'use strict';
 
 const express = require('express');
@@ -27,7 +26,7 @@ router.get('/:id', (req, res, next) => {
   });
 });
 
-// *** POST all classifieds *** //
+// *** POST create single classified *** //
 router.post('/', (req, res, next) => {
   queries.add(req.body)
   .then((classifiedID) => {
@@ -39,6 +38,11 @@ router.post('/', (req, res, next) => {
   .catch((error) => {
     next(error);
   });
+});
+
+// *** PUT update single classified by id *** //
+router.put('/:id', (req, res, next) => {
+  res.send(`hello from PUT route`);
 });
 
 module.exports = router;
