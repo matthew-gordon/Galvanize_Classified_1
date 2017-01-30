@@ -26,9 +26,14 @@ function update(classifiedID, updates) {
   return classifieds().where('id', parseInt(classifiedID)).update(updates);
 }
 
+function deleteClassified(classifiedID) {
+  return classifieds().where('id', parseInt(classifiedID)).del();
+}
+
 module.exports = {
   getAll: getAll,
   getSingle: getSingle,
   add: add,
-  update: update
+  update: update,
+  deleteClassified: deleteClassified
 };

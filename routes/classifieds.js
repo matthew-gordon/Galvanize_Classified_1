@@ -9,8 +9,7 @@ router.get('/', (req, res, next) => {
   queries.getAll()
   .then((classifieds) => {
     res.status(200).json(classifieds);
-  })
-  .catch((error) => {
+  }).catch((error) => {
     next(error);
   });
 });
@@ -20,8 +19,7 @@ router.get('/:id', (req, res, next) => {
   queries.getSingle(req.params.id)
   .then((classified) => {
     res.status(200).json(classified);
-  })
-  .catch((error) => {
+  }).catch((error) => {
     next(error);
   });
 });
@@ -34,8 +32,7 @@ router.post('/', (req, res, next) => {
   })
   .then((classified) => {
     res.status(200).json(classified);
-  })
-  .catch((error) => {
+  }).catch((error) => {
     next(error);
   });
 });
@@ -49,8 +46,22 @@ router.patch('/:id', (req, res, next) => {
   .then((classified) => {
     res.status(200).json(classified);
     console.log(classified);
-  })
-  .catch((error) => {
+  }).catch((error) => {
+    next(error);
+  });
+});
+
+// *** DELETE single classified by id *** //
+router.delete('/:id', (req, res, next) => {
+  queries.getSingle(req.params.id)
+  .then((classified) => {
+    queries.deleteClassified(req.params.id)
+    .then(() => {
+      res.status(200).json(classified);
+    }).catch((error) => {
+      next(error);
+    });
+  }).catch((error) => {
     next(error);
   });
 });
