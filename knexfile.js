@@ -4,7 +4,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postegres://localhost/classifieds',
+    connection: 'postgres://localhost/classifieds',
     migrations : {
       directory: __dirname + '/db/migrations'
     },
@@ -12,9 +12,10 @@ module.exports = {
       directory: __dirname + '/db/seeds/development'
     }
   },
+
   test: {
     client: 'pg',
-    connection: 'postegres://localhost/classifieds_test',
+    connection: 'postgres://localhost/classifieds_test',
     migrations : {
       directory: __dirname + '/db/migrations'
     },
@@ -22,6 +23,7 @@ module.exports = {
       directory: __dirname + '/db/seeds/test'
     }
    },
+   
   production: {
     client: 'pg',
     connection: process.env.DATABASE_URL,
