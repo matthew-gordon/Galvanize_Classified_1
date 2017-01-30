@@ -13,10 +13,10 @@ router.get('/', (req, res, next) => {
   })
   .catch((error) => {
     next(error);
-  })
+  });
 });
 
-// *** GET all classifieds *** //
+// *** GET single classified by id *** //
 router.get('/:id', (req, res, next) => {
   queries.getSingle(req.params.id)
   .then((classified) => {
@@ -24,7 +24,21 @@ router.get('/:id', (req, res, next) => {
   })
   .catch((error) => {
     next(error);
+  });
+});
+
+// *** POST all classifieds *** //
+router.post('/', (req, res, next) => {
+  queries.add(req.body)
+  .then((classifiedID) => {
+    return queries.getSingle(classifiedID);
   })
+  .then((classified) => {
+    res.status(200).json(classified);
+  })
+  .catch((error) => {
+    next(error);
+  });
 });
 
 module.exports = router;

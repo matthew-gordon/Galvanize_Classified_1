@@ -18,7 +18,12 @@ function getSingle(classifiedID) {
   return classifieds().where('id', parseInt(classifiedID)).first();
 }
 
+function add(classified) {
+  return classifieds().insert(classified, 'id');
+}
+
 module.exports = {
   getAll: getAll,
-  getSingle: getSingle
-}
+  getSingle: getSingle,
+  add: add
+};
